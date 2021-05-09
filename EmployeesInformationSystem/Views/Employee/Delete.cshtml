@@ -1,0 +1,175 @@
+﻿@model EmployeesInformationSystem.Models.EmployeeViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+
+    <style>
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div>
+            <form class="form-horizontal" method="POST">
+                <div class="contetainer">
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            @if (ViewBag.SuccessMsg != null)
+                            {
+                                <h3 style="font-family: cursive; color: cadetblue">@ViewBag.SuccessMsg</h3>
+                            }
+                            @if (ViewBag.ErrorMsg != null)
+                            {
+                                <h3 style="font-family: cursive; color: brown">@ViewBag.ErrorMsg</h3>
+                            }
+                        </div>
+                        <div class="col-lg-3"></div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+
+                                @Html.LabelFor(c => c.Id, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.Id, null, new { @class = "form-control", placeholder = "sId" })
+                                    @Html.ValidationMessageFor(c => c.Id, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.LabelFor(c => c.EmployeeId, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.EmployeeId, null, new { @class = "form-control", placeholder = "Employee Id" })
+                                    @Html.ValidationMessageFor(c => c.EmployeeId, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @*<label class="control-label col-sm-2" for="Name">Name:</label>*@
+                                @Html.LabelFor(c => c.Name, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    @*<input type="text" class="form-control" id="Name" name="Name" placeholder="Name">*@
+                                    @Html.TextBoxFor(c => c.Name, null, new { @class = "form-control", placeholder = "Name" })
+                                    @Html.ValidationMessageFor(c => c.Name, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.LabelFor(c => c.PhoneNo, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    @Html.TextBoxFor(c => c.PhoneNo, null, new { @class = "form-control", placeholder = "01XXXXXXXXX" })
+                                    @Html.ValidationMessageFor(c => c.PhoneNo, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.LabelFor(c => c.Email, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+
+                                    @Html.TextBoxFor(c => c.Email, null, new { @class = "form-control", placeholder = "example@gmail.com" })
+                                    @Html.ValidationMessageFor(c => c.Email, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @*<label class="control-label col-sm-2" for="Address">Address:</label>*@
+                                @Html.LabelFor(c => c.Address, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    @*<input type="text" class="form-control" id="Address" name="Address" placeholder="Address">*@
+                                    @Html.TextBoxFor(c => c.Address, null, new { @class = "form-control", placeholder = "Address" })
+                                    @Html.ValidationMessageFor(c => c.Address, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.LabelFor(c => c.Age, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+
+                                    @Html.TextBoxFor(c => c.Age, null, new { @class = "form-control", placeholder = "Age" })
+                                    @Html.ValidationMessageFor(c => c.Age, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                @Html.LabelFor(c => c.BasicSalary, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+
+                                    @Html.TextBoxFor(c => c.BasicSalary, Model.BasicSalary.ToString(), new { @class = "form-control", placeholder = "Basic Salary" })
+                                    @Html.ValidationMessageFor(c => c.BasicSalary, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(c => c.DepartmentId, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    @Html.DropDownListFor(c => c.DepartmentId, Model.DepartmentSelectList, "--Select--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.DepartmentId, null, new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(c => c.DistrictId, null, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-10">
+                                    @Html.DropDownListFor(c => c.DistrictId, Model.DistrictSelectList, "--Select--", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(c => c.DistrictId, null, new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success" value="Delete">Delete</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+
+                </div>
+
+            </form>           
+            @{
+                Html.RenderPartial("~/Views/Shared/Employee/_EmployeeDetails.cshtml", Model);
+            }
+        </div>
+
+    </div>
+
+    <script src="~/Scripts/jquery-1.8.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

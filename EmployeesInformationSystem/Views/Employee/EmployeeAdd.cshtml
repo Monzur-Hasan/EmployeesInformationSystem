@@ -1,0 +1,196 @@
+﻿@model EmployeesInformationSystem.Models.EmployeeAddVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-horizontal">
+    @using (Html.BeginForm(actionName: "EmployeeAdd", controllerName: "Employee"))
+    {
+        <div class="form-group">
+            @Html.LabelFor(c => c.DepartmentId, new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @Html.DropDownListFor(c => c.DepartmentId, Model.DepartmentList, "Select...", new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="panel">
+            <div class="panel-heading">Employee Add</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="employeeId" class="col-md-2">Employee Id</label>
+                            <div class="col-md-10">
+                                <input type="text" id="employeeId" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-md-2">Name</label>
+                            <div class="col-md-10">
+                                <input type="text" id="name" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="col-md-2">Email</label>
+                            <div class="col-md-10">
+                                <input type="text" id="email" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone" class="col-md-2">Phone</label>
+                            <div class="col-md-10">
+                                <input type="text" id="phone" class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="age" class="col-md-2">Age</label>
+                            <div class="col-md-10">
+                                <input type="text" id="age" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address" class="col-md-2">Address</label>
+                            <div class="col-md-10">
+                                <textarea id="address" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="basicSalary" class="col-md-2">Basic Salary</label>
+                            <div class="col-md-10">
+                                <input type="text" id="basicSalary" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="button" id="addButton" value="Add" class="btn btn-success" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div>
+                        <table class="table table-bordered table-striped table-hover table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Employee Id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Age</th>
+                                    <th>Address</th>
+                                    <th>Basic Salary</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="tbEmployees">
+                                @*<tr>
+                                    <td>Employee Id</td>
+                                    <td>Name</td>
+                                    <td>Email</td>
+                                    <td>Phone</td>
+                                    <td>Age</td>
+                                    <td>Address</td>
+                                    <td>Basic Salary</td>
+                                </tr>*@
+
+                                @*<tr>
+                                    <td>
+                                        <input type="hidden" name="Employees.Name[0]" value="Employees.Name" />
+                                    </td>
+                                </tr>*@
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="right">
+                <input type="submit" value="Save Employee" class="btn btn-primary" />
+            </div>
+
+        </div>
+
+    }
+
+</div>
+
+@section MyScript{
+
+    <script>
+
+        var index = 0;
+
+        $("#addButton").click(function () {
+
+            var employee = GetEmployeeRecord();
+
+            var employeeRow = GetEmployeeRow(employee);
+
+            $("#tbEmployees").append(employeeRow);
+            index++;
+        });
+
+        function GetEmployeeRecord() {
+            var employeeId = $("#employeeId").val();
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var phone = $("#phone").val();
+            var age = $("#age").val();
+            var address = $("#address").val();
+            var basicSalary = $("#basicSalary").val();
+
+            return { EmployeeId: employeeId, Name: name, Email: email, Phone: phone, Age: age, Address: address, BasicSalary: basicSalary }
+        }
+
+        function GetEmployeeRow(employee) {
+            var employeeIdHidden = " <input type='hidden' name='Employees[" + index + "].EmployeeId' value='" + employee.EmployeeId + "'/>";
+            var nameHidden = " <input type='hidden' name='Employees[" + index + "].Name' value='" + employee.Name + "'/>";
+            var emailHidden = " <input type='hidden' name='Employees[" + index + "].Email' value='" + employee.Email + "'/>";
+            var phoneHidden = " <input type='hidden' name='Employees[" + index + "].Phone' value='" + employee.Phone + "'/>";
+            var ageHidden = " <input type='hidden' name='Employees[" + index + "].Age' value='" + employee.Age + "'/>";
+            var addressHidden = " <input type='hidden' name='Employees[" + index + "].Address' value='" + employee.Address + "'/>";
+            var basicSalaryHidden = " <input type='hidden' name='Employees[" + index + "].BasicSalary' value='" + employee.BasicSalary + "'/>";
+
+
+            var tr = "<tr>";
+            /* var employeeIdCell = "<td>Employee Id</td>";*/
+            var employeeIdCell = "<td>" + employeeIdHidden + employee.EmployeeId + "</td>";
+        /* var nameCell = "<td>Name</td>";*/
+            var nameCell = "<td>" + nameHidden + employee.Name + "</td>";
+            //var emailCell = "<td>Email</td>";
+            var emailCell = "<td>" + emailHidden + employee.Email + "</td>";
+            var phoneCell = "<td>" + phoneHidden + employee.Phone + "</td>";
+            var ageCell = "<td>" + ageHidden + employee.Age + "</td>";
+            var addressCell = "<td>" + addressHidden + employee.Address + "</td>"
+            var basicSalaryCell = "<td>" + basicSalaryHidden + employee.BasicSalary + "</td>"
+            var endTr = "</tr>";
+
+            var row = tr + employeeIdCell + nameCell + emailCell + phoneCell + ageCell + addressCell + basicSalaryCell + endTr;
+
+            return row;
+        }
+    </script>
+
+}
